@@ -1,0 +1,1868 @@
+{
+  "setNo": 10,
+  "title": "FTT Test 10",
+  "questionCount": 50,
+  "questions": [
+    {
+      "id": "ftt-10-001",
+      "setNo": 10,
+      "questionNo": 1,
+      "question": "You intend to move out from a road side parking lot. Just before moving out, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Sound the horn.",
+          "confidence": 93.24
+        },
+        {
+          "key": "B",
+          "text": "Lookout for motorcyclists passing you.",
+          "confidence": 85.23
+        },
+        {
+          "key": "C",
+          "text": "Change down to first gear.",
+          "confidence": 90.79
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q01.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.51,
+        "averageConfidence": 91.44,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-002",
+      "setNo": 10,
+      "questionNo": 2,
+      "question": "You see a pedestrian with a white walking stick. This means that the person is",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Physically disabled.",
+          "confidence": 93.03
+        },
+        {
+          "key": "B",
+          "text": "Blind only.",
+          "confidence": 85.14
+        },
+        {
+          "key": "C",
+          "text": "Deaf only.",
+          "confidence": 83.66
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q02.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.6,
+        "averageConfidence": 89.61,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-003",
+      "setNo": 10,
+      "questionNo": 3,
+      "question": "You should use the right foot to contro! the",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Clutch and rear brake.",
+          "confidence": 95.58
+        },
+        {
+          "key": "B",
+          "text": "Foot-brake and accelerator.",
+          "confidence": 91.94
+        },
+        {
+          "key": "C",
+          "text": "Gear lever and accelerator.",
+          "confidence": 93.05
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q03.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 88.65,
+        "averageConfidence": 92.31,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-004",
+      "setNo": 10,
+      "questionNo": 4,
+      "question": "You should wear suitable shoes when driving to",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Prevent wear of the pedal.",
+          "confidence": 94.18
+        },
+        {
+          "key": "B",
+          "text": "Maintain control of the pedal.",
+          "confidence": 90.83
+        },
+        {
+          "key": "C",
+          "text": "Enable you to adjust your seat.",
+          "confidence": 88.59
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q04.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.43,
+        "averageConfidence": 92.51,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-005",
+      "setNo": 10,
+      "questionNo": 5,
+      "question": "Your overall stopping distance will be longer when driving",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "In the rain.",
+          "confidence": 82.9
+        },
+        {
+          "key": "B",
+          "text": "At night.",
+          "confidence": 91.5
+        },
+        {
+          "key": "C",
+          "text": "In strong wind.",
+          "confidence": 79.7
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q05.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.4,
+        "averageConfidence": 87.62,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": [
+          "low-option-C-confidence"
+        ]
+      }
+    },
+    {
+      "id": "ftt-10-006",
+      "setNo": 10,
+      "questionNo": 6,
+      "question": "Your vehicle pulls to one side when braking, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Change the tyres around.",
+          "confidence": 95.02
+        },
+        {
+          "key": "B",
+          "text": "Pump the pedal when braking.",
+          "confidence": 93.24
+        },
+        {
+          "key": "C",
+          "text": "Consult your mechanic as soon as possible.",
+          "confidence": 90.94
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q06.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.36,
+        "averageConfidence": 93.89,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-007",
+      "setNo": 10,
+      "questionNo": 7,
+      "question": "You can drive on the bus lane",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "When all other lanes are occupied.",
+          "confidence": 94.73
+        },
+        {
+          "key": "B",
+          "text": "Outside the restricted hours.",
+          "confidence": 95.01
+        },
+        {
+          "key": "C",
+          "text": "When passing another vehicle on the left.",
+          "confidence": 91.08
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q07.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.67,
+        "averageConfidence": 94.37,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-008",
+      "setNo": 10,
+      "questionNo": 8,
+      "question": "Which road user has caused a hazard?",
+      "media": "media/test-10/q08.jpg",
+      "options": [
+        {
+          "key": "A",
+          "text": "The parked car (A)",
+          "confidence": 85.27
+        },
+        {
+          "key": "B",
+          "text": "The pedestrian walking along the road (B)",
+          "confidence": 93.78
+        },
+        {
+          "key": "C",
+          "text": "The moving car (C)",
+          "confidence": 76.4
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q08.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.17,
+        "averageConfidence": 87.91,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": [
+          "low-option-C-confidence"
+        ]
+      }
+    },
+    {
+      "id": "ftt-10-009",
+      "setNo": 10,
+      "questionNo": 9,
+      "question": "Which of these can affect your reaction time?",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Drugs.",
+          "confidence": 91.9
+        },
+        {
+          "key": "B",
+          "text": "Contact lenses.",
+          "confidence": 94.68
+        },
+        {
+          "key": "C",
+          "text": "Tinted windows.",
+          "confidence": 90.38
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q09.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.68,
+        "averageConfidence": 93.41,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-010",
+      "setNo": 10,
+      "questionNo": 10,
+      "question": "The 'Two second rule’ is used in normal driving situation at",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Certain speed only.",
+          "confidence": 92.82
+        },
+        {
+          "key": "B",
+          "text": "All speed.",
+          "confidence": 90.29
+        },
+        {
+          "key": "C",
+          "text": "Fixed speed only.",
+          "confidence": 85.81
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q10.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 90.63,
+        "averageConfidence": 89.89,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-011",
+      "setNo": 10,
+      "questionNo": 11,
+      "question": "A new driver caught not displaying the ‘Probation Plate’ twice would",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Have to pay fine.",
+          "confidence": 94.13
+        },
+        {
+          "key": "B",
+          "text": "Have his licence be revoked.",
+          "confidence": 95.28
+        },
+        {
+          "key": "C",
+          "text": "Be suspended for 6 months.",
+          "confidence": 87.76
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q11.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 87.09,
+        "averageConfidence": 91.06,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-012",
+      "setNo": 10,
+      "questionNo": 12,
+      "question": "You are not allowed to book for a driving test, if you have accumulated",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "11 demerit points.",
+          "confidence": 81.31
+        },
+        {
+          "key": "B",
+          "text": "12 demerit points.",
+          "confidence": 92.94
+        },
+        {
+          "key": "C",
+          "text": "13 demerit points.",
+          "confidence": 88.7
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q12.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.62,
+        "averageConfidence": 89.89,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-013",
+      "setNo": 10,
+      "questionNo": 13,
+      "question": "While driving and you hear the siren of an ambulance behind you, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Stop immediately to let the ambulance overtake or pass.",
+          "confidence": 94.48
+        },
+        {
+          "key": "B",
+          "text": "Keep left, slow down and stop if necessary.",
+          "confidence": 94.07
+        },
+        {
+          "key": "C",
+          "text": "Speed up in order not to obstruct the ambulance.",
+          "confidence": 92.13
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q13.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.43,
+        "averageConfidence": 94.28,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-014",
+      "setNo": 10,
+      "questionNo": 14,
+      "question": "When someone follow closely behind you, he is telling you to",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Drive faster.",
+          "confidence": 95.62
+        },
+        {
+          "key": "B",
+          "text": "Move over and let him pass.",
+          "confidence": 92.23
+        },
+        {
+          "key": "C",
+          "text": "Race with him.",
+          "confidence": 92.32
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q14.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.05,
+        "averageConfidence": 94.06,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-015",
+      "setNo": 10,
+      "questionNo": 15,
+      "question": "When driving in heavy rain and passing through water, you should gently test your",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Hom.",
+          "confidence": 84.2
+        },
+        {
+          "key": "B",
+          "text": "Brakes from time to time.",
+          "confidence": 95.79
+        },
+        {
+          "key": "C",
+          "text": "Signals.",
+          "confidence": 74.75
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q15.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.28,
+        "averageConfidence": 87.75,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": [
+          "low-option-C-confidence"
+        ]
+      }
+    },
+    {
+      "id": "ftt-10-016",
+      "setNo": 10,
+      "questionNo": 16,
+      "question": "When starting the engine (automatic), the gear selector should be in",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Park (P) or Neutral (N) position.",
+          "confidence": 91.53
+        },
+        {
+          "key": "B",
+          "text": "Reverse (R) position.",
+          "confidence": 85.35
+        },
+        {
+          "key": "C",
+          "text": "{C) Drive (D) position.",
+          "confidence": 80.0
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q16.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.57,
+        "averageConfidence": 88.36,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-017",
+      "setNo": 10,
+      "questionNo": 17,
+      "question": "Who is prohibited to drive on the expressway?",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Motorcycle riders on probation.",
+          "confidence": 93.22
+        },
+        {
+          "key": "B",
+          "text": "Motorcycle riders with side-cars.",
+          "confidence": 86.07
+        },
+        {
+          "key": "C",
+          "text": "Motorcar probationary driving licence holders.",
+          "confidence": 89.2
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q17.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.37,
+        "averageConfidence": 91.22,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-018",
+      "setNo": 10,
+      "questionNo": 18,
+      "question": "Your vehicle has a puncture on the expressway. What should you do?",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Drive slowly to the workshop.",
+          "confidence": 93.34
+        },
+        {
+          "key": "B",
+          "text": "Pull up on the road shoulder.",
+          "confidence": 93.93
+        },
+        {
+          "key": "C",
+          "text": "{C) Stop in your lane and switch on the hazard lights.",
+          "confidence": 93.09
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q18.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.43,
+        "averageConfidence": 94.2,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-019",
+      "setNo": 10,
+      "questionNo": 19,
+      "question": "You are driving on a three-lane carriageway at 80 km/h There is no traffic. ahead. Which lane should you use?",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Any lane.",
+          "confidence": 92.83
+        },
+        {
+          "key": "B",
+          "text": "Middle lane.",
+          "confidence": 91.16
+        },
+        {
+          "key": "C",
+          "text": "Left lane.",
+          "confidence": 93.25
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q19.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 95.33,
+        "averageConfidence": 93.14,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-020",
+      "setNo": 10,
+      "questionNo": 20,
+      "question": "You need more braking effort when stopping your vehicle in",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "2nd gear.",
+          "confidence": 92.73
+        },
+        {
+          "key": "B",
+          "text": "3rd gear.",
+          "confidence": 90.53
+        },
+        {
+          "key": "C",
+          "text": "4th gear.",
+          "confidence": 89.37
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q20.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.58,
+        "averageConfidence": 92.3,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-021",
+      "setNo": 10,
+      "questionNo": 21,
+      "question": "You should use ‘engine brake’ to assist you when",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Travelling long distances.",
+          "confidence": 93.75
+        },
+        {
+          "key": "B",
+          "text": "Travelling down a steep slope.",
+          "confidence": 93.53
+        },
+        {
+          "key": "C",
+          "text": "You want to save fuel.",
+          "confidence": 93.97
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q21.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 92.49,
+        "averageConfidence": 93.44,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-022",
+      "setNo": 10,
+      "questionNo": 22,
+      "question": "When changing gear, the clutch pedal should be depress",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Slowly and released quickly after the change.",
+          "confidence": 93.39
+        },
+        {
+          "key": "B",
+          "text": "Quickly and released quickly after the change.",
+          "confidence": 87.99
+        },
+        {
+          "key": "C",
+          "text": "Quickly and released slowly after the change.",
+          "confidence": 94.95
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q22.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.41,
+        "averageConfidence": 93.19,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-023",
+      "setNo": 10,
+      "questionNo": 23,
+      "question": "When stopping the vehicle, the engine will stall if",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "The clutch pedal is depressed too early.",
+          "confidence": 94.9
+        },
+        {
+          "key": "B",
+          "text": "The clutch pedal is depressed too late.",
+          "confidence": 91.65
+        },
+        {
+          "key": "C",
+          "text": "The brake pedal is over released.",
+          "confidence": 92.25
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q23.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.34,
+        "averageConfidence": 93.78,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-024",
+      "setNo": 10,
+      "questionNo": 24,
+      "question": "When you approach a bend, you should slow down",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "As you drive round the bend.",
+          "confidence": 88.91
+        },
+        {
+          "key": "B",
+          "text": "As you leave the bend.",
+          "confidence": 91.29
+        },
+        {
+          "key": "C",
+          "text": "Before you enter the bend.",
+          "confidence": 87.26
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q24.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.45,
+        "averageConfidence": 90.98,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-025",
+      "setNo": 10,
+      "questionNo": 25,
+      "question": "When the engine stalls while moving off on a slope, you should immediately",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Reach for the ignition key and restart the engine.",
+          "confidence": 95.39
+        },
+        {
+          "key": "B",
+          "text": "Step on the brake pedal.",
+          "confidence": 93.31
+        },
+        {
+          "key": "C",
+          "text": "{C) Shift gear lever to neutral position.",
+          "confidence": 86.52
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q25.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 95.94,
+        "averageConfidence": 92.79,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-026",
+      "setNo": 10,
+      "questionNo": 26,
+      "question": "When you have moved to the right hand side of the road to overtake another vehicle, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Maintain your normal speed and overtake as usual.",
+          "confidence": 95.26
+        },
+        {
+          "key": "B",
+          "text": "Accelerate and overtake as quickly as possible",
+          "confidence": 92.31
+        },
+        {
+          "key": "C",
+          "text": "Decelerate and change to a higher gear.",
+          "confidence": 91.72
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q26.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.54,
+        "averageConfidence": 93.96,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-027",
+      "setNo": 10,
+      "questionNo": 27,
+      "question": "While overtaking another vehicle, the vehicle suddenly goes faster, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Accelerate hard to overtake quickly.",
+          "confidence": 93.85
+        },
+        {
+          "key": "B",
+          "text": "Slow down and move safely back to your lane.",
+          "confidence": 91.8
+        },
+        {
+          "key": "C",
+          "text": "Sound the horn continuously to warn the other driver.",
+          "confidence": 92.14
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q27.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.61,
+        "averageConfidence": 93.6,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-028",
+      "setNo": 10,
+      "questionNo": 28,
+      "question": "You are about to reverse into a side road. A pedestrian wishes to cross behind you. You should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Reverse before the pedestrian starts to cross.",
+          "confidence": 95.21
+        },
+        {
+          "key": "B",
+          "text": "Give way to the pedestrian.",
+          "confidence": 93.95
+        },
+        {
+          "key": "C",
+          "text": "Wave to the pedestrian to stop.",
+          "confidence": 89.0
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q28.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.38,
+        "averageConfidence": 93.63,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-029",
+      "setNo": 10,
+      "questionNo": 29,
+      "question": "You are reversing your vehicle into a side road. When would the greatest hazard be to the passing traffic?",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "After you have entered the side road.",
+          "confidence": 95.47
+        },
+        {
+          "key": "B",
+          "text": "When the front of your vehicle swings out.",
+          "confidence": 94.66
+        },
+        {
+          "key": "C",
+          "text": "After you have completed the manoeuvre.",
+          "confidence": 92.16
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q29.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.7,
+        "averageConfidence": 94.75,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-030",
+      "setNo": 10,
+      "questionNo": 30,
+      "question": "When your rear tyre punctures while driving, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Step hard on the brake immediately.",
+          "confidence": 93.1
+        },
+        {
+          "key": "B",
+          "text": "Grip the steering wheel to keep control, apply brake gradually and stop by the side of the road.",
+          "confidence": 95.03
+        },
+        {
+          "key": "C",
+          "text": "Apply both brakes quickly and switch off the engine.",
+          "confidence": 95.16
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q30.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.48,
+        "averageConfidence": 94.94,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-031",
+      "setNo": 10,
+      "questionNo": 31,
+      "question": "Worn out tyres and improper air pressure are other factors that",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Reduce the force of impact.",
+          "confidence": 94.24
+        },
+        {
+          "key": "B",
+          "text": "Reduce the frictional force.",
+          "confidence": 96.07
+        },
+        {
+          "key": "C",
+          "text": "Increase the effect of braking.",
+          "confidence": 89.81
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q31.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.45,
+        "averageConfidence": 94.14,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-032",
+      "setNo": 10,
+      "questionNo": 32,
+      "question": "When negotiating a sharp bend which natural force tends to push your vehicle outwards?",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Gravitational force.",
+          "confidence": 93.03
+        },
+        {
+          "key": "B",
+          "text": "Frictional force.",
+          "confidence": 94.08
+        },
+        {
+          "key": "C",
+          "text": "Centrifugal force.",
+          "confidence": 81.13
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q32.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.66,
+        "averageConfidence": 91.22,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-033",
+      "setNo": 10,
+      "questionNo": 33,
+      "question": "You need a longer distance to stop your vehicle when driving",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "On a dry road.",
+          "confidence": 52.84
+        },
+        {
+          "key": "B",
+          "text": "On a wet road.",
+          "confidence": 88.06
+        },
+        {
+          "key": "C",
+          "text": "On a hard and dry ground.",
+          "confidence": 86.91
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q33.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.6,
+        "averageConfidence": 81.1,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": [
+          "low-option-A-confidence",
+          "low-average-confidence"
+        ]
+      }
+    },
+    {
+      "id": "ftt-10-034",
+      "setNo": 10,
+      "questionNo": 34,
+      "question": "When neutral gear is engaged while driving",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "The vehicle will negotiate a bend smoothly.",
+          "confidence": 94.49
+        },
+        {
+          "key": "B",
+          "text": "It makes control easier at high speed.",
+          "confidence": 90.94
+        },
+        {
+          "key": "C",
+          "text": "It is very difficult to control the vehicle.",
+          "confidence": 86.59
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q34.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.51,
+        "averageConfidence": 92.13,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-035",
+      "setNo": 10,
+      "questionNo": 35,
+      "question": "When you want to stop your car, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Check the rear and side mirrors, signal and then stop.",
+          "confidence": 95.34
+        },
+        {
+          "key": "B",
+          "text": "Signal first and then stop.",
+          "confidence": 92.93
+        },
+        {
+          "key": "C",
+          "text": "Stop and check the rear and side mirrors.",
+          "confidence": 90.69
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q35.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.6,
+        "averageConfidence": 93.89,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-036",
+      "setNo": 10,
+      "questionNo": 36,
+      "question": "You should dip your headlights when",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Driving in a dark area.",
+          "confidence": 91.66
+        },
+        {
+          "key": "B",
+          "text": "Facing oncoming traffic.",
+          "confidence": 91.2
+        },
+        {
+          "key": "C",
+          "text": "Approaching a blind corner.",
+          "confidence": 88.94
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q36.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.52,
+        "averageConfidence": 92.08,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-037",
+      "setNo": 10,
+      "questionNo": 37,
+      "question": "You see two elderly pedestrians about to cross the road ahead, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Expect them to wait for you to pass.",
+          "confidence": 95.12
+        },
+        {
+          "key": "B",
+          "text": "Speed up to pass them quickly.",
+          "confidence": 93.24
+        },
+        {
+          "key": "C",
+          "text": "Be careful, they may misjudge your speed.",
+          "confidence": 92.03
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q37.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.2,
+        "averageConfidence": 94.15,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-038",
+      "setNo": 10,
+      "questionNo": 38,
+      "question": "When you approach this traffic light junction, you should",
+      "media": "media/test-10/q38.jpg",
+      "options": [
+        {
+          "key": "A",
+          "text": "Slow down and be ready to stop when the light changes.",
+          "confidence": 94.41
+        },
+        {
+          "key": "B",
+          "text": "Speed up to pass the junction before the light changes.",
+          "confidence": 95.39
+        },
+        {
+          "key": "C",
+          "text": "Maintain a high speed so as not to disrupt the traffic flow.",
+          "confidence": 94.02
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q38.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.6,
+        "averageConfidence": 95.1,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-039",
+      "setNo": 10,
+      "questionNo": 39,
+      "question": "You are driving towards a zebra crossing. Pedestrians are waiting to cross, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Continue on your way.",
+          "confidence": 94.59
+        },
+        {
+          "key": "B",
+          "text": "Be prepared to stop.",
+          "confidence": 92.42
+        },
+        {
+          "key": "C",
+          "text": "Wave to the people to wait.",
+          "confidence": 88.28
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q39.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.75,
+        "averageConfidence": 93.01,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-040",
+      "setNo": 10,
+      "questionNo": 40,
+      "question": "You are following a lorry approaching a 'U' turn sign. The driver signals right but moves to the left, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Wait behind the lorry.",
+          "confidence": 93.87
+        },
+        {
+          "key": "B",
+          "text": "Overtake on the left-hand side.",
+          "confidence": 95.48
+        },
+        {
+          "key": "C",
+          "text": "{C) Overtake on the right-hand side.",
+          "confidence": 88.59
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q40.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 93.31,
+        "averageConfidence": 92.81,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-041",
+      "setNo": 10,
+      "questionNo": 41,
+      "question": "You are permitted to use the outer most right lane on a three-lane dual carriageway when",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "You are travelling at the maximum legal speed limit of the road.",
+          "confidence": 95.86
+        },
+        {
+          "key": "B",
+          "text": "You intend to turn right ahead.",
+          "confidence": 94.57
+        },
+        {
+          "key": "C",
+          "text": "Emergency vehicles are not using it.",
+          "confidence": 91.85
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q41.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 95.91,
+        "averageConfidence": 94.55,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-042",
+      "setNo": 10,
+      "questionNo": 42,
+      "question": "When the temperature gauge on your vehicle indicates ‘hot'. What is the cause?",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "The exhaust pipe is getting too hot.",
+          "confidence": 93.31
+        },
+        {
+          "key": "B",
+          "text": "The engine is heating up.",
+          "confidence": 93.12
+        },
+        {
+          "key": "C",
+          "text": "The air conditioning is not working properly.",
+          "confidence": 90.69
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q42.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 95.26,
+        "averageConfidence": 93.09,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-043",
+      "setNo": 10,
+      "questionNo": 43,
+      "question": "While driving, and your engine gets overheated, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Pour water to cool down the engine.",
+          "confidence": 90.87
+        },
+        {
+          "key": "B",
+          "text": "Slow down and stop at a safe spot to let the engine cool down by itself.",
+          "confidence": 90.71
+        },
+        {
+          "key": "C",
+          "text": "Drive to the nearest petrol kiosk for repairs.",
+          "confidence": 92.08
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q43.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 95.59,
+        "averageConfidence": 92.31,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-044",
+      "setNo": 10,
+      "questionNo": 44,
+      "question": "You are driving in very wet weather. Your vehicle begins to slide. This effect is called",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Weaving.",
+          "confidence": 91.76
+        },
+        {
+          "key": "B",
+          "text": "Fading.",
+          "confidence": 90.4
+        },
+        {
+          "key": "C",
+          "text": "Aquaplaning.",
+          "confidence": 71.03
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q44.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.59,
+        "averageConfidence": 87.45,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": [
+          "low-option-C-confidence"
+        ]
+      }
+    },
+    {
+      "id": "ftt-10-045",
+      "setNo": 10,
+      "questionNo": 45,
+      "question": "You are travelling at the legal speed limit. A vehicle comes up quickly behind, flashing its headlights. You should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Maintain your speed to prevent the vehicle from overtaking.",
+          "confidence": 95.34
+        },
+        {
+          "key": "B",
+          "text": "Allow the vehicle to overtake.",
+          "confidence": 95.77
+        },
+        {
+          "key": "C",
+          "text": "Touch the brakes sharply to show your brake lights.",
+          "confidence": 93.16
+        }
+      ],
+      "answer": "B",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q45.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.4,
+        "averageConfidence": 95.17,
+        "answerScores": {
+          "A": 0,
+          "B": 758,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-046",
+      "setNo": 10,
+      "questionNo": 46,
+      "question": "What should you use the road shoulder of an expressway for?",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Leaving the expressway.",
+          "confidence": 93.66
+        },
+        {
+          "key": "B",
+          "text": "Joining the expressway.",
+          "confidence": 84.68
+        },
+        {
+          "key": "C",
+          "text": "Stopping in an emergency.",
+          "confidence": 87.34
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q46.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.51,
+        "averageConfidence": 90.55,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-047",
+      "setNo": 10,
+      "questionNo": 47,
+      "question": "You intend to turn left and there is a cyclist ahead on the left, you should",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Slow down and allow the cyclist to pass the junction.",
+          "confidence": 94.67
+        },
+        {
+          "key": "B",
+          "text": "Drive faster to avoid the cyclist.",
+          "confidence": 91.37
+        },
+        {
+          "key": "C",
+          "text": "Horn to warn him you are turning left.",
+          "confidence": 90.07
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q47.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.29,
+        "averageConfidence": 93.1,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-048",
+      "setNo": 10,
+      "questionNo": 48,
+      "question": "You should never attempt to overtake a cyclist",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Just before you turn left.",
+          "confidence": 94.75
+        },
+        {
+          "key": "B",
+          "text": "Just before you turn right.",
+          "confidence": 92.02
+        },
+        {
+          "key": "C",
+          "text": "On a one-way street.",
+          "confidence": 84.01
+        }
+      ],
+      "answer": "A",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q48.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.79,
+        "averageConfidence": 91.89,
+        "answerScores": {
+          "A": 758,
+          "B": 0,
+          "C": 0
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-049",
+      "setNo": 10,
+      "questionNo": 49,
+      "question": "You should use your right hand indicator when",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "You intend to slow down.",
+          "confidence": 95.69
+        },
+        {
+          "key": "B",
+          "text": "You are about to stop.",
+          "confidence": 92.48
+        },
+        {
+          "key": "C",
+          "text": "You intend to move to the right at any time.",
+          "confidence": 91.82
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q49.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.54,
+        "averageConfidence": 94.13,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    },
+    {
+      "id": "ftt-10-050",
+      "setNo": 10,
+      "questionNo": 50,
+      "question": "You should check your mirrors before",
+      "media": null,
+      "options": [
+        {
+          "key": "A",
+          "text": "Moving off, slowing down and stopping.",
+          "confidence": 92.65
+        },
+        {
+          "key": "B",
+          "text": "Changing lane, overtaking, turning and every 5 to 10 seconds.",
+          "confidence": 93.31
+        },
+        {
+          "key": "C",
+          "text": "Both A and B.",
+          "confidence": 90.88
+        }
+      ],
+      "answer": "C",
+      "sourceImage": "ftt/FTT Test 10/FTT_E_P10_Q50.jpg",
+      "review": {
+        "status": "draft",
+        "questionConfidence": 96.57,
+        "averageConfidence": 93.35,
+        "answerScores": {
+          "A": 0,
+          "B": 0,
+          "C": 758
+        },
+        "flags": []
+      }
+    }
+  ]
+}
