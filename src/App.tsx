@@ -5,10 +5,11 @@ const DURATION_SECONDS = 50 * 60;
 const PASS_MARK = 45;
 const STORAGE_HISTORY = "ftt.history.v1";
 const STORAGE_ACTIVE_PREFIX = "ftt.active.v1.";
+const STORAGE_PRACTICE = "ftt.practice.v1";
 
 type OptionKey = "A" | "B" | "C";
-type ViewName = "home" | "confirm" | "exam" | "result" | "review";
 type ReviewFilter = "all" | "incorrect" | "unanswered" | "flagged";
+type PracticeMode = "all" | "mistakes";
 
 type TestIndexItem = {
   setNo: number;
@@ -60,12 +61,39 @@ type CompletedAttempt = AttemptBase & {
   questionsAnswered: number;
 };
 
+type PracticeQuestionRecord = {
+  selected: OptionKey;
+  correct: boolean;
+  attempts: number;
+  firstAnsweredAt: number;
+  lastAnsweredAt: number;
+  sourceSetNo: number;
+  questionNo: number;
+};
+
+type PracticeCurrentAnswer = {
+  questionId: string;
+  selected: OptionKey;
+  correct: boolean;
+  answeredAt: number;
+};
+
+type PracticeProgress = {
+  records: Record<string, PracticeQuestionRecord>;
+  flags: Record<string, boolean>;
+  currentQuestionId: string | null;
+  currentAnswer: PracticeCurrentAnswer | null;
+  mode: PracticeMode;
+  updatedAt: number | null;
+};
+
 type ViewState =
   | { name: "home" }
   | { name: "confirm"; setNo: number }
   | { name: "exam"; setNo: number }
   | { name: "result"; attemptId: string }
-  | { name: "review"; attemptId: string };
+  | { name: "review"; attemptId: string }
+  | { name: "practice" };
 
 function activeKey(setNo: number) {
   return `${STORAGE_ACTIVE_PREFIX}${setNo}`;
@@ -117,15 +145,75 @@ function mediaUrl(question: Question) {
   return question.media ? `/data/${question.media}` : null;
 }
 
+function createEmptyPracticeProgress(): PracticeProgress {
+  return {
+    records: {},
+    flags: {},
+    currentQuestionId: null,
+    currentAnswer: null,
+    mode: "all",
+    updatedAt: null,
+  };
+}
+
+function getPracticeStats(progress: PracticeProgress, totalQuestions: number) {
+  const records = Object.values(progress.records);
+  const attempted = records.length;
+  const correct = records.filter((record) => record.correct).length;
+  const needsPracticeIds = new Set([
+    ...Object.entries(progress.records)
+      .filter(([, record]) => !record.correct)
+      .map(([id]) => id),
+    ...Object.entries(progress.flags)
+      .filter(([, flagged]) => flagged)
+      .map(([id]) => id),
+  ]);
+
+  return {
+    attempted,
+    correct,
+    accuracy: attempted ? Math.round((correct / attempted) * 100) : 0,
+    remaining: Math.max(0, totalQuestions - attempted),
+    needsPractice: needsPracticeIds.size,
+  };
+}
+
+function isNeedsPractice(question: Question, progress: PracticeProgress) {
+  const record = progress.records[question.id];
+  return Boolean(progress.flags[question.id]) || Boolean(record && !record.correct);
+}
+
+function getPracticePool(questions: Question[], progress: PracticeProgress) {
+  if (progress.mode === "mistakes") {
+    return questions.filter((question) => isNeedsPractice(question, progress));
+  }
+
+  const unseen = questions.filter((question) => !progress.records[question.id]);
+  if (unseen.length > 0) return unseen;
+  return questions.filter((question) => isNeedsPractice(question, progress));
+}
+
+function pickQuestion(questions: Question[], avoidQuestionId?: string | null) {
+  const choices =
+    avoidQuestionId && questions.length > 1
+      ? questions.filter((question) => question.id !== avoidQuestionId)
+      : questions;
+  return choices[Math.floor(Math.random() * choices.length)] ?? null;
+}
+
 function App() {
   const [view, setView] = useState<ViewState>({ name: "home" });
   const [testIndex, setTestIndex] = useState<TestIndexItem[]>([]);
   const [tests, setTests] = useState<Record<number, TestSet>>({});
+  const [allPracticeQuestions, setAllPracticeQuestions] = useState<Question[] | null>(null);
   const [history, setHistory] = useState<CompletedAttempt[]>(() => readJson(STORAGE_HISTORY, []));
   const [activeAttempts, setActiveAttempts] = useState<Record<number, ActiveAttempt | null>>({});
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [lastResultId, setLastResultId] = useState<string | null>(null);
+  const [practiceProgress, setPracticeProgress] = useState<PracticeProgress>(() =>
+    readJson(STORAGE_PRACTICE, createEmptyPracticeProgress()),
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -169,6 +257,28 @@ function App() {
     [testIndex, tests],
   );
 
+  const loadAllQuestions = useCallback(async () => {
+    if (allPracticeQuestions) return allPracticeQuestions;
+
+    const loadedTests = await Promise.all(
+      testIndex.map(async (item) => {
+        const cached = tests[item.setNo];
+        if (cached) return cached;
+
+        const response = await fetch(`/data/${item.file}`);
+        if (!response.ok) throw new Error(`Unable to load ${item.title}`);
+        return (await response.json()) as TestSet;
+      }),
+    );
+    const questions = loadedTests.flatMap((test) => test.questions);
+    setAllPracticeQuestions(questions);
+    setTests((current) => ({
+      ...current,
+      ...Object.fromEntries(loadedTests.map((test) => [test.setNo, test])),
+    }));
+    return questions;
+  }, [allPracticeQuestions, testIndex, tests]);
+
   const saveActive = useCallback((attempt: ActiveAttempt | null, setNo: number) => {
     if (attempt) {
       writeJson(activeKey(setNo), attempt);
@@ -182,6 +292,24 @@ function App() {
     writeJson(STORAGE_HISTORY, items);
     setHistory(items);
   }, []);
+
+  const savePracticeProgress = useCallback((progress: PracticeProgress) => {
+    const next = { ...progress, updatedAt: Date.now() };
+    writeJson(STORAGE_PRACTICE, next);
+    setPracticeProgress(next);
+  }, []);
+
+  const startPractice = useCallback(
+    (mode: PracticeMode) => {
+      const next =
+        practiceProgress.mode === mode
+          ? practiceProgress
+          : { ...practiceProgress, mode, currentQuestionId: null, currentAnswer: null };
+      savePracticeProgress(next);
+      setView({ name: "practice" });
+    },
+    [practiceProgress, savePracticeProgress],
+  );
 
   const submitAttempt = useCallback(
     async (attempt: ActiveAttempt, submittedBy: "manual" | "timer") => {
@@ -233,9 +361,11 @@ function App() {
           testIndex={testIndex}
           history={history}
           activeAttempts={activeAttempts}
+          practiceProgress={practiceProgress}
           onStart={(setNo) => setView({ name: "confirm", setNo })}
           onResume={(setNo) => setView({ name: "exam", setNo })}
           onReview={(attemptId) => setView({ name: "review", attemptId })}
+          onPractice={startPractice}
         />
       )}
       {view.name === "confirm" && (
@@ -292,6 +422,14 @@ function App() {
           onRetake={(setNo) => setView({ name: "confirm", setNo })}
         />
       )}
+      {view.name === "practice" && (
+        <PracticePage
+          progress={practiceProgress}
+          loadAllQuestions={loadAllQuestions}
+          saveProgress={savePracticeProgress}
+          onHome={() => setView({ name: "home" })}
+        />
+      )}
     </Shell>
   );
 }
@@ -308,17 +446,24 @@ function HomePage({
   testIndex,
   history,
   activeAttempts,
+  practiceProgress,
   onStart,
   onResume,
   onReview,
+  onPractice,
 }: {
   testIndex: TestIndexItem[];
   history: CompletedAttempt[];
   activeAttempts: Record<number, ActiveAttempt | null>;
+  practiceProgress: PracticeProgress;
   onStart: (setNo: number) => void;
   onResume: (setNo: number) => void;
   onReview: (attemptId: string) => void;
+  onPractice: (mode: PracticeMode) => void;
 }) {
+  const totalPracticeQuestions = testIndex.reduce((total, test) => total + test.questionCount, 0);
+  const practiceStats = getPracticeStats(practiceProgress, totalPracticeQuestions);
+
   return (
     <div className="page home-page">
       <header className="hero">
@@ -326,6 +471,36 @@ function HomePage({
         <h1>FTT Practice</h1>
         <p>Choose one of the 10 full test sets. Attempts, results, and unfinished tests are saved on this device.</p>
       </header>
+
+      <section className="practice-home-panel" aria-label="Practice mode">
+        <div>
+          <p className="eyebrow">Revision mode</p>
+          <h2>Practice All Questions</h2>
+          <p>Endless, untimed revision across all {totalPracticeQuestions} questions with instant answer feedback.</p>
+        </div>
+        <dl className="practice-stats">
+          <div>
+            <dt>Practised</dt>
+            <dd>{practiceStats.attempted}/{totalPracticeQuestions}</dd>
+          </div>
+          <div>
+            <dt>Accuracy</dt>
+            <dd>{practiceStats.attempted ? `${practiceStats.accuracy}%` : "No answers yet"}</dd>
+          </div>
+          <div>
+            <dt>Needs practice</dt>
+            <dd>{practiceStats.needsPractice}</dd>
+          </div>
+        </dl>
+        <div className="practice-actions">
+          <button onClick={() => onPractice("all")}>
+            {practiceStats.attempted ? "Continue Practice" : "Start Practice"}
+          </button>
+          <button className="secondary" disabled={practiceStats.needsPractice === 0} onClick={() => onPractice("mistakes")}>
+            Practice Mistakes
+          </button>
+        </div>
+      </section>
 
       <section className="test-grid" aria-label="Test sets">
         {testIndex.map((test) => {
@@ -870,6 +1045,291 @@ function ReviewPage({
           )}
         </section>
       </div>
+
+      {mediaPreview && (
+        <div className="modal-backdrop" onClick={() => setMediaPreview(null)}>
+          <div className="image-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}>
+            <button className="close-button icon-close" onClick={() => setMediaPreview(null)}>Close</button>
+            <img src={mediaPreview} alt="Question visual enlarged" />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PracticePage({
+  progress,
+  loadAllQuestions,
+  saveProgress,
+  onHome,
+}: {
+  progress: PracticeProgress;
+  loadAllQuestions: () => Promise<Question[]>;
+  saveProgress: (progress: PracticeProgress) => void;
+  onHome: () => void;
+}) {
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [mediaPreview, setMediaPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadAllQuestions()
+      .then((loaded) => {
+        if (cancelled) return;
+        setQuestions(loaded);
+        setLoadError(null);
+      })
+      .catch((error) => {
+        if (cancelled) return;
+        setLoadError(error instanceof Error ? error.message : "Unable to load practice questions.");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [loadAllQuestions]);
+
+  const questionsById = useMemo(() => new Map(questions.map((question) => [question.id, question])), [questions]);
+  const stats = useMemo(() => getPracticeStats(progress, questions.length), [progress, questions.length]);
+  const currentQuestion = progress.currentQuestionId ? questionsById.get(progress.currentQuestionId) ?? null : null;
+  const currentAnswer =
+    currentQuestion && progress.currentAnswer?.questionId === currentQuestion.id ? progress.currentAnswer : null;
+
+  useEffect(() => {
+    if (questions.length === 0) return;
+
+    const existingQuestion = progress.currentQuestionId ? questionsById.get(progress.currentQuestionId) ?? null : null;
+    const canKeepExisting =
+      Boolean(existingQuestion && currentAnswer) ||
+      Boolean(existingQuestion && progress.mode === "all" && !progress.records[existingQuestion.id]) ||
+      Boolean(existingQuestion && isNeedsPractice(existingQuestion, progress));
+
+    if (canKeepExisting) return;
+
+    const nextQuestion = pickQuestion(getPracticePool(questions, progress));
+    if (!nextQuestion) return;
+
+    saveProgress({
+      ...progress,
+      currentQuestionId: nextQuestion.id,
+      currentAnswer: null,
+    });
+  }, [currentAnswer, progress, questions, questionsById, saveProgress]);
+
+  const answerQuestion = (selected: OptionKey) => {
+    if (!currentQuestion || currentAnswer) return;
+
+    const now = Date.now();
+    const previous = progress.records[currentQuestion.id];
+    const correct = selected === currentQuestion.answer;
+    saveProgress({
+      ...progress,
+      records: {
+        ...progress.records,
+        [currentQuestion.id]: {
+          selected,
+          correct,
+          attempts: (previous?.attempts ?? 0) + 1,
+          firstAnsweredAt: previous?.firstAnsweredAt ?? now,
+          lastAnsweredAt: now,
+          sourceSetNo: currentQuestion.setNo,
+          questionNo: currentQuestion.questionNo,
+        },
+      },
+      currentAnswer: {
+        questionId: currentQuestion.id,
+        selected,
+        correct,
+        answeredAt: now,
+      },
+    });
+  };
+
+  const goNext = () => {
+    if (!currentQuestion) return;
+    const nextQuestion = pickQuestion(getPracticePool(questions, progress), currentQuestion.id);
+    saveProgress({
+      ...progress,
+      currentQuestionId: nextQuestion?.id ?? null,
+      currentAnswer: null,
+    });
+  };
+
+  const toggleFlag = () => {
+    if (!currentQuestion) return;
+    saveProgress({
+      ...progress,
+      flags: {
+        ...progress.flags,
+        [currentQuestion.id]: !progress.flags[currentQuestion.id],
+      },
+    });
+  };
+
+  const switchMode = (mode: PracticeMode) => {
+    saveProgress({
+      ...progress,
+      mode,
+      currentQuestionId: null,
+      currentAnswer: null,
+    });
+  };
+
+  const resetPractice = () => {
+    if (!window.confirm("Reset all practice progress? This keeps test attempts and history unchanged.")) return;
+    saveProgress(createEmptyPracticeProgress());
+  };
+
+  if (loading) return <div className="center-state">Loading practice questions...</div>;
+
+  if (loadError) {
+    return (
+      <div className="page narrow-page">
+        <section className="panel">
+          <h1>Practice unavailable</h1>
+          <p>{loadError}</p>
+          <button className="icon-home" onClick={onHome}>Return Home</button>
+        </section>
+      </div>
+    );
+  }
+
+  const source = currentQuestion ? mediaUrl(currentQuestion) : null;
+  const hasPracticePool = getPracticePool(questions, progress).length > 0;
+
+  return (
+    <div className="exam-page practice-page">
+      <header className="exam-topbar practice-topbar">
+        <button className="secondary compact icon-home" onClick={onHome}>Home</button>
+        <div>
+          <span>{progress.mode === "mistakes" ? "Practice Mistakes" : "Practice All Questions"}</span>
+          <strong>{stats.attempted}/{questions.length} practised</strong>
+        </div>
+        <div className="practice-mini-stats">
+          <span>{stats.accuracy}% accuracy</span>
+          <span>{stats.needsPractice} needs practice</span>
+        </div>
+      </header>
+
+      <main className="practice-layout">
+        <aside className="practice-side-panel">
+          <div>
+            <p className="eyebrow">Progress</p>
+            <dl className="practice-side-stats">
+              <div><dt>Remaining unseen</dt><dd>{stats.remaining}</dd></div>
+              <div><dt>Correct latest</dt><dd>{stats.correct}</dd></div>
+              <div><dt>Needs practice</dt><dd>{stats.needsPractice}</dd></div>
+            </dl>
+          </div>
+
+          <div className="practice-mode-buttons" role="group" aria-label="Practice mode">
+            <button
+              className={progress.mode === "all" ? "filter active" : "filter"}
+              onClick={() => switchMode("all")}
+            >
+              All questions
+            </button>
+            <button
+              className={progress.mode === "mistakes" ? "filter active" : "filter"}
+              disabled={stats.needsPractice === 0}
+              onClick={() => switchMode("mistakes")}
+            >
+              Mistakes
+            </button>
+          </div>
+
+          <button className="secondary" onClick={resetPractice}>Reset Practice Progress</button>
+        </aside>
+
+        <section className="question-panel practice-question-panel">
+          {!currentQuestion || (!hasPracticePool && !currentAnswer) ? (
+            <div className="practice-complete">
+              <p className="eyebrow">Practice complete</p>
+              <h1>{progress.mode === "mistakes" ? "No mistakes left to practise" : "All questions completed"}</h1>
+              <p>
+                {progress.mode === "mistakes"
+                  ? "Wrong and flagged questions will appear here when they need another pass."
+                  : "You have seen every question. Reset practice progress when you want to explicitly repeat the full bank."}
+              </p>
+              <div className="form-actions">
+                {progress.mode === "mistakes" && <button onClick={() => switchMode("all")}>Back to All Questions</button>}
+                <button className="secondary" onClick={resetPractice}>Practice All Again</button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="practice-question-meta">
+                <p className="eyebrow">Set {currentQuestion.setNo} · Question {currentQuestion.questionNo}</p>
+                <button
+                  className={progress.flags[currentQuestion.id] ? "flag active icon-flag" : "flag icon-flag"}
+                  onClick={toggleFlag}
+                >
+                  {progress.flags[currentQuestion.id] ? "Marked difficult" : "Mark difficult"}
+                </button>
+              </div>
+
+              <div className="question-copy">
+                <h1>{currentQuestion.question}</h1>
+                {source && (
+                  <button className="image-button" onClick={() => setMediaPreview(source)} aria-label="Open question image larger">
+                    <img src={source} alt={`Question ${currentQuestion.questionNo} visual`} />
+                    <span>Tap to enlarge</span>
+                  </button>
+                )}
+              </div>
+
+              <div className="options practice-options" role="radiogroup" aria-label="Answer options">
+                {currentQuestion.options.map((option) => {
+                  const isSelected = currentAnswer?.selected === option.key;
+                  const isCorrect = currentAnswer && currentQuestion.answer === option.key;
+                  const isWrong = currentAnswer && isSelected && !isCorrect;
+                  const classes = [
+                    "option",
+                    isSelected && !currentAnswer ? "selected" : "",
+                    isCorrect ? "correct" : "",
+                    isWrong ? "wrong" : "",
+                  ].join(" ");
+
+                  return (
+                    <button
+                      className={classes}
+                      disabled={Boolean(currentAnswer)}
+                      key={option.key}
+                      onClick={() => answerQuestion(option.key)}
+                    >
+                      <span>{option.key}</span>
+                      <strong>{option.text}</strong>
+                      {isCorrect && <em>Correct answer</em>}
+                      {isWrong && <em>Your answer</em>}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {currentAnswer && (
+                <div className={currentAnswer.correct ? "practice-feedback correct-text" : "practice-feedback wrong-text"}>
+                  <strong>{currentAnswer.correct ? "Correct" : "Incorrect"}</strong>
+                  <span>
+                    Correct answer: {currentQuestion.answer}.{" "}
+                    {currentQuestion.options.find((option) => option.key === currentQuestion.answer)?.text}
+                  </span>
+                </div>
+              )}
+
+              <div className="practice-bottom-actions">
+                <button className="secondary icon-home" onClick={onHome}>Exit Practice</button>
+                <button className="icon-next" disabled={!currentAnswer} onClick={goNext}>Next Question</button>
+              </div>
+            </>
+          )}
+        </section>
+      </main>
 
       {mediaPreview && (
         <div className="modal-backdrop" onClick={() => setMediaPreview(null)}>

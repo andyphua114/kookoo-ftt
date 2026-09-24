@@ -218,6 +218,50 @@ p {
   max-width: 720px;
 }
 
+.practice-home-panel {
+  align-items: center;
+  background: var(--surface-card);
+  border: 1px solid rgba(225, 228, 231, 0.72);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.9fr) auto;
+  margin-bottom: 24px;
+  padding: 18px;
+}
+
+.practice-home-panel h2 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.practice-home-panel p {
+  color: var(--neutral-600);
+  margin-bottom: 0;
+}
+
+.practice-stats,
+.practice-side-stats {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.practice-stats div,
+.practice-side-stats div {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.practice-actions {
+  display: grid;
+  gap: 10px;
+  min-width: 180px;
+}
+
 .test-grid {
   display: grid;
   gap: 14px;
@@ -503,6 +547,25 @@ dd {
   font-weight: 500;
 }
 
+.practice-topbar {
+  grid-template-columns: auto 1fr auto;
+}
+
+.practice-mini-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.practice-mini-stats span {
+  background: var(--selection-100);
+  border-radius: var(--radius-control);
+  color: var(--selection-900);
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
 .timer {
   background: var(--success-100);
   border-radius: var(--radius-control);
@@ -689,6 +752,100 @@ dd {
   box-shadow: var(--shadow-md);
   min-width: 0;
   padding: 20px;
+}
+
+.practice-layout {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 280px minmax(0, 1fr);
+  margin: 18px auto 0;
+  max-width: 1180px;
+  padding: 0 16px;
+}
+
+.practice-side-panel {
+  align-self: start;
+  background: var(--surface-card);
+  border: 1px solid rgba(225, 228, 231, 0.72);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  gap: 18px;
+  padding: 16px;
+  position: sticky;
+  top: 76px;
+}
+
+.practice-mode-buttons {
+  display: grid;
+  gap: 8px;
+}
+
+.practice-question-panel {
+  min-height: calc(100vh - 118px);
+}
+
+.practice-question-meta {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.practice-question-meta .eyebrow {
+  margin-bottom: 0;
+}
+
+.practice-options .option {
+  grid-template-columns: 42px 1fr auto;
+}
+
+.practice-options .option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.practice-options .option:disabled:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.practice-feedback {
+  border-radius: 12px;
+  display: grid;
+  gap: 4px;
+  margin-top: 16px;
+  padding: 14px;
+}
+
+.practice-feedback strong {
+  font-size: 18px;
+}
+
+.practice-bottom-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.practice-complete {
+  align-content: center;
+  display: grid;
+  min-height: 420px;
+}
+
+.practice-complete h1 {
+  color: var(--ink-900);
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 500;
+  line-height: 1.05;
+  margin-bottom: 12px;
+}
+
+.practice-complete p {
+  color: var(--neutral-600);
 }
 
 .mobile-grid-toggle {
@@ -1104,15 +1261,38 @@ dd {
     grid-column: 1 / -1;
   }
 
+  .practice-home-panel {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .practice-actions {
+    min-width: 0;
+  }
+
   .exam-topbar {
     gap: 8px;
     grid-template-columns: auto 1fr auto;
     padding: 8px;
   }
 
-  .exam-topbar > button:last-child {
+  .exam-topbar > button:last-child:not(:first-child) {
     grid-column: 1 / -1;
     width: 100%;
+  }
+
+  .practice-topbar {
+    grid-template-columns: auto 1fr;
+  }
+
+  .practice-mini-stats {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+
+  .practice-mini-stats span {
+    flex: 1;
+    text-align: center;
   }
 
   .timer {
@@ -1124,6 +1304,21 @@ dd {
     display: block;
     margin-top: 12px;
     padding: 0 10px;
+  }
+
+  .practice-layout {
+    display: block;
+    margin-top: 12px;
+    padding: 0 10px;
+  }
+
+  .practice-side-panel {
+    margin-bottom: 12px;
+    position: static;
+  }
+
+  .practice-question-panel {
+    min-height: 0;
   }
 
   .question-grid-panel {
@@ -1167,6 +1362,15 @@ dd {
     grid-template-columns: 38px 1fr;
   }
 
+  .practice-options .option {
+    align-items: start;
+    grid-template-columns: 38px 1fr;
+  }
+
+  .practice-options .option em {
+    grid-column: 2;
+  }
+
   .review-options .option em {
     grid-column: 2;
   }
@@ -1177,7 +1381,8 @@ dd {
   }
 
   .form-actions,
-  .card-actions {
+  .card-actions,
+  .practice-bottom-actions {
     display: grid;
   }
 }
