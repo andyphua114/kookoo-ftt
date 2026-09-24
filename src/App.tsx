@@ -6,10 +6,12 @@ const PASS_MARK = 45;
 const STORAGE_HISTORY = "ftt.history.v1";
 const STORAGE_ACTIVE_PREFIX = "ftt.active.v1.";
 const STORAGE_PRACTICE = "ftt.practice.v1";
+const STORAGE_THEME = "ftt.theme.v1";
 
 type OptionKey = "A" | "B" | "C";
 type ReviewFilter = "all" | "incorrect" | "unanswered" | "flagged";
 type PracticeMode = "all" | "mistakes";
+type ThemeMode = "light" | "dark";
 
 type TestIndexItem = {
   setNo: number;
@@ -112,6 +114,12 @@ function writeJson<T>(key: string, value: T) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 
+function getInitialTheme(): ThemeMode {
+  const saved = window.localStorage.getItem(STORAGE_THEME);
+  if (saved === "light" || saved === "dark") return saved;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
 function formatDate(timestamp?: number) {
   if (!timestamp) return "Never";
   return new Intl.DateTimeFormat(undefined, {
@@ -203,6 +211,7 @@ function pickQuestion(questions: Question[], avoidQuestionId?: string | null) {
 
 function App() {
   const [view, setView] = useState<ViewState>({ name: "home" });
+  const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
   const [testIndex, setTestIndex] = useState<TestIndexItem[]>([]);
   const [tests, setTests] = useState<Record<number, TestSet>>({});
   const [allPracticeQuestions, setAllPracticeQuestions] = useState<Question[] | null>(null);
@@ -214,6 +223,11 @@ function App() {
   const [practiceProgress, setPracticeProgress] = useState<PracticeProgress>(() =>
     readJson(STORAGE_PRACTICE, createEmptyPracticeProgress()),
   );
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem(STORAGE_THEME, theme);
+  }, [theme]);
 
   useEffect(() => {
     let cancelled = false;
@@ -346,12 +360,23 @@ function App() {
     return history.find((attempt) => attempt.id === attemptId) ?? (lastResultId === attemptId ? history[0] : undefined);
   }
 
+  const toggleTheme = () => {
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
+  };
+
   if (loading) {
     return <Shell><div className="center-state loading-state">Loading FTT question sets...</div></Shell>;
   }
 
   if (loadError) {
-    return <Shell><div className="center-state error">{loadError}</div></Shell>;
+    return (
+      <Shell>
+        <div className="center-state error">
+          <ThemeToggle theme={theme} onToggleTheme={toggleTheme} />
+          {loadError}
+        </div>
+      </Shell>
+    );
   }
 
   return (
@@ -362,10 +387,12 @@ function App() {
           history={history}
           activeAttempts={activeAttempts}
           practiceProgress={practiceProgress}
+          theme={theme}
           onStart={(setNo) => setView({ name: "confirm", setNo })}
           onResume={(setNo) => setView({ name: "exam", setNo })}
           onReview={(attemptId) => setView({ name: "review", attemptId })}
           onPractice={startPractice}
+          onToggleTheme={toggleTheme}
         />
       )}
       {view.name === "confirm" && (
@@ -373,8 +400,10 @@ function App() {
           setNo={view.setNo}
           testIndex={testIndex}
           activeAttempt={activeAttempts[view.setNo] ?? null}
+          theme={theme}
           onBack={() => setView({ name: "home" })}
           onResume={() => setView({ name: "exam", setNo: view.setNo })}
+          onToggleTheme={toggleTheme}
           onStart={async (shuffle) => {
             const test = await loadTest(view.setNo);
             const baseOrder = test.questions.map((question) => question.questionNo);
@@ -402,24 +431,30 @@ function App() {
           activeAttempt={activeAttempts[view.setNo] ?? null}
           loadTest={loadTest}
           saveActive={saveActive}
+          theme={theme}
           onExit={() => setView({ name: "home" })}
           onSubmit={submitAttempt}
+          onToggleTheme={toggleTheme}
         />
       )}
       {view.name === "result" && (
         <ResultPage
           attempt={getAttemptForResult(view.attemptId)}
+          theme={theme}
           onHome={() => setView({ name: "home" })}
           onRetake={(setNo) => setView({ name: "confirm", setNo })}
           onReview={(attemptId) => setView({ name: "review", attemptId })}
+          onToggleTheme={toggleTheme}
         />
       )}
       {view.name === "review" && (
         <ReviewPage
           attempt={history.find((attempt) => attempt.id === view.attemptId)}
           loadTest={loadTest}
+          theme={theme}
           onHome={() => setView({ name: "home" })}
           onRetake={(setNo) => setView({ name: "confirm", setNo })}
+          onToggleTheme={toggleTheme}
         />
       )}
       {view.name === "practice" && (
@@ -427,7 +462,9 @@ function App() {
           progress={practiceProgress}
           loadAllQuestions={loadAllQuestions}
           saveProgress={savePracticeProgress}
+          theme={theme}
           onHome={() => setView({ name: "home" })}
+          onToggleTheme={toggleTheme}
         />
       )}
     </Shell>
@@ -442,24 +479,51 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
+function ThemeToggle({
+  theme,
+  onToggleTheme,
+  compact = false,
+}: {
+  theme: ThemeMode;
+  onToggleTheme: () => void;
+  compact?: boolean;
+}) {
+  return (
+    <label className={compact ? "theme-toggle compact" : "theme-toggle"}>
+      <input
+        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        checked={theme === "dark"}
+        onChange={onToggleTheme}
+        type="checkbox"
+      />
+      <span aria-hidden="true" />
+      {!compact && <strong>{theme === "dark" ? "Dark" : "Light"}</strong>}
+    </label>
+  );
+}
+
 function HomePage({
   testIndex,
   history,
   activeAttempts,
   practiceProgress,
+  theme,
   onStart,
   onResume,
   onReview,
   onPractice,
+  onToggleTheme,
 }: {
   testIndex: TestIndexItem[];
   history: CompletedAttempt[];
   activeAttempts: Record<number, ActiveAttempt | null>;
   practiceProgress: PracticeProgress;
+  theme: ThemeMode;
   onStart: (setNo: number) => void;
   onResume: (setNo: number) => void;
   onReview: (attemptId: string) => void;
   onPractice: (mode: PracticeMode) => void;
+  onToggleTheme: () => void;
 }) {
   const totalPracticeQuestions = testIndex.reduce((total, test) => total + test.questionCount, 0);
   const practiceStats = getPracticeStats(practiceProgress, totalPracticeQuestions);
@@ -467,7 +531,10 @@ function HomePage({
   return (
     <div className="page home-page">
       <header className="hero">
-        <p className="eyebrow">Singapore Final Theory Test</p>
+        <div className="hero-topline">
+          <p className="eyebrow">Singapore Final Theory Test</p>
+          <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
+        </div>
         <h1>FTT Practice</h1>
         <p>Choose one of the 10 full test sets. Attempts, results, and unfinished tests are saved on this device.</p>
       </header>
@@ -576,23 +643,30 @@ function StartConfirmation({
   setNo,
   testIndex,
   activeAttempt,
+  theme,
   onBack,
   onResume,
   onStart,
+  onToggleTheme,
 }: {
   setNo: number;
   testIndex: TestIndexItem[];
   activeAttempt: ActiveAttempt | null;
+  theme: ThemeMode;
   onBack: () => void;
   onResume: () => void;
   onStart: (shuffle: boolean) => void;
+  onToggleTheme: () => void;
 }) {
   const [shuffle, setShuffle] = useState(false);
   const test = testIndex.find((item) => item.setNo === setNo);
 
   return (
     <div className="page narrow-page">
-      <button className="text-button" onClick={onBack}>Back to home</button>
+      <div className="page-top-actions">
+        <button className="text-button" onClick={onBack}>Back to home</button>
+        <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
+      </div>
       <section className="panel">
         <p className="eyebrow">Start confirmation</p>
         <h1>{test?.title ?? `FTT Test ${setNo}`}</h1>
@@ -643,15 +717,19 @@ function ExamPage({
   activeAttempt,
   loadTest,
   saveActive,
+  theme,
   onExit,
   onSubmit,
+  onToggleTheme,
 }: {
   setNo: number;
   activeAttempt: ActiveAttempt | null;
   loadTest: (setNo: number) => Promise<TestSet>;
   saveActive: (attempt: ActiveAttempt | null, setNo: number) => void;
+  theme: ThemeMode;
   onExit: () => void;
   onSubmit: (attempt: ActiveAttempt, submittedBy: "manual" | "timer") => Promise<CompletedAttempt>;
+  onToggleTheme: () => void;
 }) {
   const [test, setTest] = useState<TestSet | null>(null);
   const [currentNo, setCurrentNo] = useState(activeAttempt?.currentQuestionNo ?? 1);
@@ -696,6 +774,10 @@ function ExamPage({
   if (!activeAttempt) {
     return (
       <div className="page narrow-page">
+        <div className="page-top-actions">
+          <span />
+          <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
+        </div>
         <section className="panel">
           <h1>No active test</h1>
           <p>This test has already been submitted or restarted.</p>
@@ -758,6 +840,7 @@ function ExamPage({
         <button className="icon-submit" disabled={!canSubmit || submitting} onClick={submitManually}>
           Submit
         </button>
+        <ThemeToggle compact theme={theme} onToggleTheme={onToggleTheme} />
       </header>
 
       <div className="exam-layout">
@@ -852,18 +935,26 @@ function ExamPage({
 
 function ResultPage({
   attempt,
+  theme,
   onHome,
   onRetake,
   onReview,
+  onToggleTheme,
 }: {
   attempt?: CompletedAttempt;
+  theme: ThemeMode;
   onHome: () => void;
   onRetake: (setNo: number) => void;
   onReview: (attemptId: string) => void;
+  onToggleTheme: () => void;
 }) {
   if (!attempt) {
     return (
       <div className="page narrow-page">
+        <div className="page-top-actions">
+          <span />
+          <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
+        </div>
         <section className="panel">
           <h1>Result unavailable</h1>
           <button onClick={onHome}>Return Home</button>
@@ -874,6 +965,10 @@ function ResultPage({
 
   return (
     <div className="page narrow-page">
+      <div className="page-top-actions">
+        <span />
+        <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
+      </div>
       <section className="result-card">
         <p className="eyebrow">{attempt.testTitle}</p>
         <h1>{attempt.passed ? "Passed" : "Try Again"}</h1>
@@ -899,13 +994,17 @@ function ResultPage({
 function ReviewPage({
   attempt,
   loadTest,
+  theme,
   onHome,
   onRetake,
+  onToggleTheme,
 }: {
   attempt?: CompletedAttempt;
   loadTest: (setNo: number) => Promise<TestSet>;
+  theme: ThemeMode;
   onHome: () => void;
   onRetake: (setNo: number) => void;
+  onToggleTheme: () => void;
 }) {
   const [test, setTest] = useState<TestSet | null>(null);
   const [currentNo, setCurrentNo] = useState(attempt?.order[0] ?? 1);
@@ -927,6 +1026,10 @@ function ReviewPage({
   if (!attempt) {
     return (
       <div className="page narrow-page">
+        <div className="page-top-actions">
+          <span />
+          <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
+        </div>
         <section className="panel">
           <h1>Attempt not found</h1>
           <button className="icon-home" onClick={onHome}>Return Home</button>
@@ -964,6 +1067,7 @@ function ReviewPage({
         </div>
         <div className={attempt.passed ? "pill pass" : "pill fail"}>{attempt.score}/50</div>
         <button onClick={() => onRetake(attempt.testSet)}>Retake</button>
+        <ThemeToggle compact theme={theme} onToggleTheme={onToggleTheme} />
       </header>
 
       <div className="exam-layout">
@@ -1062,12 +1166,16 @@ function PracticePage({
   progress,
   loadAllQuestions,
   saveProgress,
+  theme,
   onHome,
+  onToggleTheme,
 }: {
   progress: PracticeProgress;
   loadAllQuestions: () => Promise<Question[]>;
   saveProgress: (progress: PracticeProgress) => void;
+  theme: ThemeMode;
   onHome: () => void;
+  onToggleTheme: () => void;
 }) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1191,6 +1299,10 @@ function PracticePage({
   if (loadError) {
     return (
       <div className="page narrow-page">
+        <div className="page-top-actions">
+          <span />
+          <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
+        </div>
         <section className="panel">
           <h1>Practice unavailable</h1>
           <p>{loadError}</p>
@@ -1215,6 +1327,7 @@ function PracticePage({
           <span>{stats.accuracy}% accuracy</span>
           <span>{stats.needsPractice} needs practice</span>
         </div>
+        <ThemeToggle compact theme={theme} onToggleTheme={onToggleTheme} />
       </header>
 
       <main className="practice-layout">
